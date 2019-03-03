@@ -1,1 +1,5 @@
-这个版本是master。
+这个版本是master。说明merge into current的意思是，合并成当前版本。
+
+现在，我是在branch01中编辑。
+
+我现在在branch01中编辑，为什么master也能看到呢？
