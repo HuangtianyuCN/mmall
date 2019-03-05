@@ -87,7 +87,7 @@ public class ProductServiceImpl implements IProductService {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
         Product product = productMapper.selectByPrimaryKey(productId);
-        if(product!=null){
+        if(product==null){
             return ServerResponse.createByErrorMessage("商品不存在");
         }
 //        vo对象（value object）
@@ -181,7 +181,7 @@ public class ProductServiceImpl implements IProductService {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
         Product product = productMapper.selectByPrimaryKey(productId);
-        if(product!=null){
+        if(product==null){
             return ServerResponse.createByErrorMessage("商品不存在");
         }
         if(product.getStatus()!= Const.ProductStatusEnum.ON_SALE.getCode()){

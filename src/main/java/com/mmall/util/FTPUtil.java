@@ -33,7 +33,7 @@ public class FTPUtil {
         FTPUtil ftpUtil = new FTPUtil(ftpIp,21,ftpUser,ftpPassword);
         logger.info("开始连接FTP服务器");
         boolean result = ftpUtil.uploadFile("img",fileList);
-        logger.info("开始连接FTP服务器，结束上传，上传结果：{}");
+        logger.info("开始连接FTP服务器，结束上传，上传结果：{}",result);
 
         return result;
     }
@@ -44,13 +44,19 @@ public class FTPUtil {
 //        连接FTP服务器
         if(connectServer(this.getIp(),this.port,this.user,this.pwd)){
             try {
-                ftpClient.changeWorkingDirectory(remotePath);
+                if(!ftpClient.changeWorkingDirectory(remotePath)){
+                    logger.info("正在创建 {} 文件夹",remotePath);
+                    ftpClient.makeDirectory(remotePath);
+                    if(!ftpClient.changeWorkingDirectory(remotePath))
+                        logger.error("文件夹创建失败");
+                }
                 ftpClient.setBufferSize(1024);
                 ftpClient.setControlEncoding("UTF-8");
                 ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
                 ftpClient.enterLocalPassiveMode();
                 for(File fileItem:fileList){
                     fis = new FileInputStream(fileItem);
+                    //通过指定的流将文件上传至服务器
                     ftpClient.storeFile(fileItem.getName(),fis);
                 }
             } catch (IOException e) {
@@ -79,6 +85,8 @@ public class FTPUtil {
         }
         return isSuccess;
     }
+
+
 
 
     private String ip;
