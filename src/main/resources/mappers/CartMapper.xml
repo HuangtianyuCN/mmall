@@ -145,9 +145,9 @@
     where user_id = #{userId}
     <if test="productIdList != null">
       and product_id in
-      <foreach collection="productIdList" item="item" index="index" open="(" separator="," close=")">
-        #{item}
-      </foreach>
+    <foreach collection="productIdList" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
     </if>
   </delete>
 
@@ -169,7 +169,7 @@
   </select>
 
 
-
+  <!--找到这个用户所有选中的商品-->
   <select id="selectCheckedCartByUserId" parameterType="int" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
@@ -177,7 +177,6 @@
     where user_id = #{userId}
     and checked = 1
   </select>
-
 
 
 
