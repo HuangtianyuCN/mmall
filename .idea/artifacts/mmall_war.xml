@@ -9,6 +9,12 @@
     </properties>
     <root id="archive" name="mmall.war">
       <element id="artifact" artifact-name="mmall:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/webapp/lib/alipay-sdk-java-3.3.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/webapp/lib/alipay-trade-sdk-20161215.jar" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>

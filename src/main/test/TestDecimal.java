@@ -25,4 +25,10 @@ public class TestDecimal {
         BigDecimal b2 = new BigDecimal("0.01");
         System.out.println(b1.add(b2));
     }
+
+    @Test
+    public void test04(){
+        Long l = Long.parseLong("699900.00");
+        System.out.println(l);
+    }
 }
